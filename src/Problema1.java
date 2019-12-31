@@ -4,7 +4,7 @@ import java.util.Stack;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.io.File;
-
+import java.io.FileNotFoundException;
 
 class Parser
 {
@@ -101,15 +101,19 @@ public class Problema1
         int n;
         try
         {
-            File file = new File("../funciones.txt");
+            File file = new File("funciones.txt");
             Scanner sc = new Scanner(file);
+            n = Integer.parseInt(sc.nextLine());
+            Hashtable<Character, Queue<Character>> tabla = new Hashtable<Character, Queue<Character>>(n);
             while (sc.hasNextLine())
             {
-                System.out.println(sc.nextLine());
+                String text = sc.nextLine();
+                tabla.put(text.charAt(0), Parser.parse(text.substring(4)));
             }
+            System.out.println(tabla);
             sc.close();
         }
-        catch(Exception e)
+        catch(FileNotFoundException e)
         {
             System.out.println("Archivo no encontrado");
             System.exit(1);
