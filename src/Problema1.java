@@ -1,6 +1,9 @@
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.Hashtable;
+import java.util.Scanner;
+import java.io.File;
 
 
 class Parser
@@ -41,7 +44,10 @@ class Parser
         return va>vb;
     }
     
-    static Queue parse(String str)
+    //implementacion del algorithmo Shunting Yard
+    //que convierte una expresión matemática en notación infija
+    //a una en notación polaca inversa (RPN)s
+    static Queue<Character> parse(String str)
     {
         Queue<Character> cola = new LinkedList<>();
         Stack<Character> pila = new Stack<>();
@@ -77,12 +83,36 @@ class Parser
         return cola;
     }
 }
+
+
 public class Problema1
 {
+    /*
+    static float solve(Queue<Character> cola)
+    {
+        for(int i=0; i<cola.size(); i++)
+        {
+
+        }
+    }
+    */
     public static void main(String args[])
     {
-        Queue cola = Parser.parse("4+4");
-        while(!cola.isEmpty())
-            System.out.println(cola.poll());
+        int n;
+        try
+        {
+            File file = new File("../funciones.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine())
+            {
+                System.out.println(sc.nextLine());
+            }
+            sc.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Archivo no encontrado");
+            System.exit(1);
+        }
     }
 }
