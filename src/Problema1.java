@@ -6,6 +6,32 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+class Hilo extends Thread
+{
+    static Float valor;
+    Queue<String> _cola;
+    float _x;
+    Hashtable<String, Queue<String>> _tabla;
+
+    public Hilo(Queue<String> cola, float x, Hashtable<String, Queue<String>> tabla)
+    {
+        this._cola = cola;
+        this._x = x;
+        this._tabla = tabla;
+    }
+
+    
+    public void run()
+    {
+        valor = Parser.solve(_cola, _x, _tabla);
+    }
+
+    Float getVal()
+    {
+        return valor;
+    }
+}
+
 class Parser
 {
     //responde a la pregunta de si el operador a tiene
@@ -101,11 +127,8 @@ class Parser
             cola.add(String.valueOf(pila.pop()));
         return cola;
     }
-}
 
-
-public class Problema1
-{
+    //resuelve expresiones en forma de notación polaca inversa
     static Float solve(Queue<String> cola, float x, Hashtable<String, Queue<String>> tabla)
     {
         Float a, b;
@@ -148,15 +171,30 @@ public class Problema1
                 }
                 else
                 {
-                    
                     Queue<String> aux = new LinkedList<String>(tabla.get(elem));
-                    Float val = solve(aux, x, tabla);
-                    pila.push(val);
+                    Hilo hilo = new Hilo(aux, x, tabla);
+                    Thread hilio = new Thread(hilo);
+                    hilio.start();
+                    try
+                    {
+                        hilio.join();
+                    } catch (InterruptedException f)
+                    {
+                        System.out.println("F");
+                        System.exit(1);
+                    }
+                    
+                    pila.push(hilo.getVal());
                 }
             }
         }
         return pila.pop();
     }
+}
+
+
+public class Problema1
+{
     public static void main(String args[])
     {
         int n;
@@ -174,7 +212,7 @@ public class Problema1
             
             Queue<String> aux = new LinkedList<String>(tabla.get("f"));
             
-            System.out.println(solve(aux, 1, tabla));
+            System.out.println(Parser.solve(aux, 1, tabla));
             sc.close();
         }
         catch(FileNotFoundException e)
