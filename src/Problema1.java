@@ -208,12 +208,26 @@ public class Problema1
             {
                 String text = sc.nextLine();
                 tabla.put(text.substring(0, 1), Parser.parse(text.substring(4)));
+
             }
-            
-            Queue<String> aux = new LinkedList<String>(tabla.get("f"));
-            
-            System.out.println(Parser.solve(aux, 1, tabla));
             sc.close();
+
+        
+            Scanner sc1 = new Scanner(System.in);
+            String funcion;
+            System.out.println("Ingrese funcion:");
+            funcion = sc1.nextLine();
+            while(!funcion.equals("0")||funcion!=null||funcion.length()!=0)
+            {
+                Queue<String> aux = new LinkedList<String>(tabla.get(funcion.substring(0, 1)));
+                System.out.print("El resultado es: ");
+                System.out.println(Parser.solve(aux, Float.parseFloat(funcion.substring(2, funcion.length()-1)), tabla));
+                System.out.println("\nIngrese funcion:");
+                funcion = sc1.nextLine();
+            }
+            System.out.println("Ejecucion terminada");
+
+            
         }
         catch(FileNotFoundException e)
         {
