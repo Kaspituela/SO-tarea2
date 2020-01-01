@@ -226,6 +226,7 @@ public class Problema1
                 funcion = sc1.nextLine();
             }
             System.out.println("Ejecucion terminada");
+            sc1.close();
 
             
         }
