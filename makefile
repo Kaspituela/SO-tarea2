@@ -1,8 +1,15 @@
-CLS=classes
-PATH=src/*.java
+JCC = javac
+JCR = java
+FLAGS = -g
 
-compile: $(PATH)
-	javac -d $(CLS) $(PATH)
+all:
+	if ! -d "classes"; then\
+		mkdir classes;\
+	fi
+	$(JCC) $(FLAGS) -d classes src/*.java
 
-run: compile
-	java -cp $(CLS) Problema1
+run:
+	$(JCR) -cp classes Problema1
+
+clean:
+	rm -rf ./classes
