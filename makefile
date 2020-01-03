@@ -2,7 +2,7 @@ JCC = javac
 JCR = java
 FLAGS = -g
 
-all:
+compile:
 	if ! -d "classes"; then\
 		mkdir classes;\
 	fi
