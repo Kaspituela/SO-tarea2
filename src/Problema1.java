@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 
 class Hilo extends Thread
 {
+    //clase para adaptar la clase thread a las necesidades del programa
+    //a partir de reescribir el método run, que realiza la función del thread
     static Float valor;
     Queue<String> _cola;
     float _x;
@@ -200,18 +202,23 @@ public class Problema1
         int n;
         try
         {
+            //Se lee el archivo de las funciones
             File file = new File("funciones.txt");
             Scanner sc = new Scanner(file);
             n = Integer.parseInt(sc.nextLine());
+
+            //Se crea una tabla de hashing para almacenar las funciones teniendo la letra
+            //e la función como llave
             Hashtable<String, Queue<String>> tabla = new Hashtable<String, Queue<String>>(n);
             while (sc.hasNextLine())
             {
                 String text = sc.nextLine();
+                //Se parsean las funciones y se agregan a la tabla
                 tabla.put(text.substring(0, 1), Parser.parse(text.substring(4)));
             }
             sc.close();
 
-        
+            //se solicitan hacen las peticiones al usuario
             Scanner sc1 = new Scanner(System.in);
             String funcion;
             System.out.println("Ingrese funcion:");
@@ -226,6 +233,7 @@ public class Problema1
                     System.out.println("\nIngrese funcion:");
                     funcion = sc1.nextLine();
                 }
+                //ante cualquier problema, se sale del ciclo
                 catch(Exception e)
                 {
                     break;
