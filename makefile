@@ -11,5 +11,7 @@ compile:
 run:
 	$(JCR) -cp classes Problema1
 
+run1:
+	$(JCR) -cp classes Problema2
 clean:
 	rm -rf ./classes
