@@ -13,4 +13,4 @@ Este problema se abordo con la idea del algoritmo mergesort, separando en 2 arre
 <h2>Nota</h2>
 - Los comandos deben ser ejecutados desde la carpeta raiz.
 - Con el comando compilar ya se están compilando los dos problemas.
-- Las clases se crean en el directorio classes. El archivo 'funciones.txt' debe estar en la carpeta raiz.
+- Las clases se crean en el directorio classes. El archivo 'funciones.txt' debe estar en la carpeta src/.
